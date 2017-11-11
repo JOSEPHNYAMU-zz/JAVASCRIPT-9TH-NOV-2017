@@ -14,7 +14,7 @@
 <link rel="icon" type="image/png" href="img/logo.png"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script>
-        //Functions
+        //On Submit
 function validate() {
     var x = document.forms["cytonn"]["names"].value;
     if (x == "") {
@@ -90,6 +90,71 @@ function fire() {
         function hove(){
             alert("You Have CLicked the Slider!")
         }
+        function page(){
+            alert("Welcome to Homepage");
+        }
+        
+        //Custom Events
+     var Jose;
+    var tech = function () {
+        var x = document.forms["kings"]["cities"].value;
+           var y = document.getElementById("cities").value;
+        if(x == ""){
+            alert("Enter name of city!")
+        }else{
+        try {
+            Jose = new CustomEvent(
+               "city",
+                {
+                    detail: {
+                        description: "You are in "+y,
+                        timeofevent: new Date(),
+                        eventcode: 2
+                    },
+                    bubbles: true,
+                    cancelable: true
+                }
+            );
+            document.addEventListener("city", customEventHandler);
+            //Raise an Event
+            document.dispatchEvent(Jose);
+        } catch (e) {
+            console.log(e.message);
+        }
+    }
+    //Event Handler
+    function customEventHandler() {
+        alert(window.event.detail.description);
+    }}
+    
+    //Promises
+var mondays = false;
+var rains = new Promise(
+    function (resolve, reject) {
+        if (mondays) {
+            var times = {
+                Time: '3:00 pm',
+                Cloudy: 'Yes'
+            };
+            resolve(times);
+        } else {
+            var reason = new Error('Today is not Monday so it will not rain!');
+            reject(reason);
+        }
+
+    }
+);
+
+var mon = function () {
+    rains
+        .then(function (fulfilled) {
+            console.log(fulfilled);
+        })
+        .catch(function (error) {
+            console.log(error.message);
+        });
+}
+mon();
     </script>
 </head>
 <body>
@@ -106,8 +171,6 @@ function fire() {
 </ul>
 </div>
 </div>
-
-
 <div class="row" onclick="hove()">
 <div class="large-12 columns">
 <ul class="example-orbit" data-orbit>
@@ -117,11 +180,9 @@ function fire() {
 </ul>
 </div>
 </div>
-    
-
 <div class="row">
 <div class="large-4 columns">
-    <h5 style="font-weight: bold;color:green;">FUNCTIONS</h5>
+    <h5 style="font-weight: bold;color:green;">FUNCTIONS | ONSUBMIT</h5>
 <p style="text-align: justify;">Below Function validate form field not to be empty, Click submit without putting any value!</p>
    <form name="cytonn" action="#"
 onsubmit="return validate()" method="post">
@@ -132,8 +193,7 @@ onsubmit="return validate()" method="post">
           <input type="text" placeholder="Name" name="names">
         </div>
         <div class="small-2 columns">
-            <input type="submit" class="button postfix" value="Submit">
-          
+            <input type="submit" class="button postfix" value="Submit"> 
         </div>
       </div>
     </div>
@@ -156,7 +216,6 @@ method="post">
         </div>
         <div class="small-2 columns">
             <button type="button" onclick="adds()" class="button postfix"><i class="fi-plus"></i>&nbsp;SUM</button>
-          
         </div>
       </div>
     </div>
@@ -170,7 +229,59 @@ method="post">
 <button type="button" onclick="fire()" class="button postfix"><i class="fi-plus"></i>&nbsp;Use Strict</button>
 </div>
 </div>
-   
+<div class="row">
+     <hr height="20"/>
+<div class="large-4 columns">
+    <h5 style="font-weight: bold;color:green;">OTHER EVENTS</h5>
+   <form name="cytonn" action="#"
+onsubmit="return validate()" method="post">
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <div class="small-12 columns">
+            <input type="button" onclick="page()" class="button postfix" value="ON CLICK">
+          
+        </div>
+           <div class="small-12 columns">
+            <input type="button" onmouseover="page()" class="button postfix" value="ON MOUSE OVER">
+          
+        </div>
+           <div class="small-12 columns">
+            <input type="button" onmouseout="page()" class="button postfix" value="ON MOUSE OUT">
+          
+        </div>
+          <div class="small-12 columns">
+            <input type="button" onmousemove="page()" class="button postfix" value="ON MOUSE MOVE">
+        </div>
+      </div>
+    </div>
+  </div>
+</form> 
+</div>
+<div class="large-4 columns">
+     <h5 style="font-weight: bold;color:green;">CUSTOM EVENTS</h5>
+<p style="text-align: justify;">A JavaScript Custom Event</p>
+      <form name="kings" action="#"
+onsubmit="return tech()" method="post">
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <div class="small-12 columns">
+          <input type="text" placeholder="City" id="cities" name="cities">
+        </div>
+        <div class="small-12 columns">
+            <button type="submit" onclick="tech()" class="button postfix"><i class="fi-eye"></i>&nbsp;SHOW CUSTOM EVENT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form> 
+</div>
+<div class="large-4 columns">
+ <h5 style="font-weight: bold;color:green;">PROMISES</h5>
+<p style="text-align: justify;">A demonstration of Javascript Promises. Turn on console and change the value of mondays to true, false to see results.</p>
+</div>
+</div>   
 <div class="row">
      <hr/>
 <div class="large-4 columns">
@@ -199,16 +310,12 @@ method="post">
       </div>
     </div>
   </div>
-</form>   
-    
-    
+</form>     
 </div>
 <div class="large-4 columns">
  <h5 style="font-weight: bold;color:green;">CLOSURES</h5>
 <p style="text-align: justify;">In this example, it uses closures to display the text. Turn on console and click the button to view.</p>
-    
-    
-    <form name="lion" action="#"
+<form name="lion" action="#"
 method="post">
   <div class="row">
     <div class="large-12 columns">
@@ -226,11 +333,7 @@ method="post">
 <div class="large-4 columns">
      <h5 style="font-weight: bold;color:green;">PROTOTYPES</h5>
 <p style="text-align: justify;">Example of prototype</p>
-    
-    
     <p id="pro"></p>
-    
-    
     <script>
 function City(area, distance, people) {
     this.places = area;
@@ -246,6 +349,23 @@ document.getElementById("pro").innerHTML =
 </script>
 
 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </div>
 <footer class="row">
 <div class="large-12 columns">
